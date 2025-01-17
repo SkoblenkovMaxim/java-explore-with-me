@@ -1,7 +1,7 @@
 FROM amazoncorretto:21-alpine as builder
 WORKDIR application
 COPY target/*.jar app.jar
-RUN java -Djarmode=layertools -jar app.jar extract
+RUN java -Djarmode=layertools -jar server-0.0.1-SNAPSHOT.jar extract
 
 FROM amazoncorretto:21-alpine
 COPY --from=builder /application/dependencies/ ./
