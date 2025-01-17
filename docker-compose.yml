@@ -23,9 +23,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=12345
 
-  ewm-service:
+  ewn-service:
     build:
-      context: ./ewn-service/server
+      context: ./ewn-service
     image: ewn-image
     container_name: ewn-container
     ports:
@@ -38,7 +38,7 @@ services:
       - SPRING_DATASOURCE_POSTGRES_USER=postgres
       - SPRING_DATASOURCE_POSTGRES_PASSWORD=12345
 
-  ewm-db:
+  ewn-db:
     image: postgres:16.6
     container_name: ewn-db
     ports:
