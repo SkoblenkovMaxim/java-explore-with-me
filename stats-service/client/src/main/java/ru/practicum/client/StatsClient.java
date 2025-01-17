@@ -42,8 +42,8 @@ public class StatsClient extends BaseClient {
         return get("/stats?start={start}&end={end}&uris={uris}&unique={unique}", params);
     }
 
-    public ResponseEntity<Object> hit(EndpointHitDto EndpointHitDto) {
-        return post("/hit", EndpointHitDto);
+    public ResponseEntity<Object> hit(EndpointHitDto endpointHitDto) {
+        return post("/hit", endpointHitDto);
     }
 
 }
