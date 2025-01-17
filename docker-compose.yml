@@ -22,3 +22,27 @@ services:
       - POSTGRES_DB=stats_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=12345
+
+  ewm-service:
+    build:
+      context: ./ewn-service/server
+    image: ewn-image
+    container_name: ewn-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ewn-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewn_db:5432/ewn_db
+      - SPRING_DATASOURCE_POSTGRES_USER=postgres
+      - SPRING_DATASOURCE_POSTGRES_PASSWORD=12345
+
+  ewm-db:
+    image: postgres:16.6
+    container_name: ewn-db
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=ewn_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
