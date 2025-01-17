@@ -34,7 +34,7 @@ services:
       - ewn-db
       - stats-server
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewn_db:5432/ewn_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewn-db:5432/ewn_db
       - SPRING_DATASOURCE_POSTGRES_USER=postgres
       - SPRING_DATASOURCE_POSTGRES_PASSWORD=12345
 
