@@ -1,5 +1,5 @@
 services:
-  stats-service:
+  stats-server:
     build:
       context: ./stats-service/server
     image: stats-image
@@ -32,7 +32,7 @@ services:
       - "8080:8080"
     depends_on:
       - ewm-db
-      - stats-service
+      - stats-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm_db
       - SPRING_DATASOURCE_POSTGRES_USER=postgres
