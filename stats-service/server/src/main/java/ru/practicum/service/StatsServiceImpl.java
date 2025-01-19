@@ -12,10 +12,7 @@ import ru.practicum.model.EndpointHit;
 import ru.practicum.repository.EndpointHitRepository;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -45,9 +42,13 @@ public class StatsServiceImpl implements StatsService {
         log.info("Получена статистика по параметрам: Start({}), End({}), Uris({}), Unique({})",
                 startTime, endTime, uris, unique);
 
-        List<String> uriList = Arrays.stream(uris.split("\\s*,\\s*"))
-                .filter(str -> str.chars().count() != 0)
-                .toList();
+        List<String> uriList = new ArrayList<>();
+
+        if (uris != null) {
+            uriList = Arrays.stream(uris.split("\\s*,\\s*"))
+                    .filter(str -> str.chars().count() != 0)
+                    .toList();
+        }
 
         List<ViewStatsDto> listViewStatsDto;
 
