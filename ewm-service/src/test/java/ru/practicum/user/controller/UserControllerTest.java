@@ -12,7 +12,7 @@ import ru.practicum.user.dto.NewUserRequest;
 import ru.practicum.user.dto.UserDto;
 import ru.practicum.user.service.UserServiceImpl;
 
-@WebMvcTest(UserAdminController.class)
+@WebMvcTest(UserController.class)
 @AutoConfigureMockMvc
 class UserControllerTest {
 

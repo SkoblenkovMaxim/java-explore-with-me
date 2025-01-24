@@ -42,15 +42,6 @@ public class UserServiceImpl implements UserService{
                 .map(userMapper::toUserDto)
                 .toList();
 
-//        if (users.isEmpty() || users == null) {
-//            log.info("Пользователи найдены");
-//            return userRepository
-//                    .findAll()
-//                    .stream()
-//                    .map(userMapper::toUserDto)
-//                    .collect(Collectors.toList());
-//        }
-
         log.info("Пользователи найдены");
         return userRepository.findAll().stream()
                 .map(userMapper::toUserDto)
