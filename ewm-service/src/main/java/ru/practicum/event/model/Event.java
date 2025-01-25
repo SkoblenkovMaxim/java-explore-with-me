@@ -15,53 +15,53 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
-    private Long id;
+    private Long id; // Идентификатор
+
+    @Column(name = "title")
+    private String title; // Заголовок
 
     @Column(name = "annotation")
-    private String annotation;
+    private String annotation; // Краткое описание
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category category;
+    private Category category; // Категория
 
-    @Column(name = "confirmed_requests")
-    private Long confirmedRequests;
-
-    @Column(name = "created_on")
-    private LocalDateTime createdOn;
-
-    @Column(name = "description")
-    private String description;
+    @Column(name = "paid")
+    private Boolean paid; // Нужно ли оплачивать участие
 
     @Column(name = "event_date")
-    private LocalDateTime eventDate;
+    private LocalDateTime eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
 
     @ManyToOne
     @JoinColumn(name = "initiator_id")
-    private User initiator;
+    private User initiator; // Пользователь
 
-    @Column(name = "lat")
-    private Float lat;
-
-    @Column(name = "lon")
-    private Float lon;
-
-    @Column(name = "paid")
-    private Boolean paid;
+    @Column(name = "description")
+    private String description; // Полное описание события
 
     @Column(name = "participant_limit")
-    private Integer participantLimit;
-
-    @Column(name = "published_on")
-    private LocalDateTime publishedOn;
-
-    @Column(name = "request_moderation")
-    private Boolean requestModeration;
+    private Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
     @Enumerated(value = EnumType.STRING)
-    private EventState state;
+    private EventState state; // Список состояний жизненного цикла события
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "created_on")
+    private LocalDateTime createdOn; // Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
+
+    @Column(name = "lat")
+    private Float lat; // Широта
+
+    @Column(name = "lon")
+    private Float lon; // Долгота
+
+    @Column(name = "request_moderation")
+    private Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
+
+    @Column(name = "confirmed_requests")
+    private Long confirmedRequests; // Количество одобренных заявок на участие в данном событии
+
+    @Column(name = "published_on")
+    private LocalDateTime publishedOn; // Дата и время публикации события (в формате "yyyy-MM-dd HH:mm:ss")
 
 }

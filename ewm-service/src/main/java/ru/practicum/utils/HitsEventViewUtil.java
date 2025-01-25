@@ -10,11 +10,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class HitsEventViewUtil {
 
-    private ObjectMapper objectMapper;
-
-    public Long getHitsEvent(Long eventId, LocalDateTime start, LocalDateTime end, Boolean unique, StatsClient statsClient) {
+    public static Long getHitsEvent(Long eventId, LocalDateTime start, LocalDateTime end, Boolean unique, StatsClient statsClient) {
 
         List<String> uris = new ArrayList<>();
         uris.add("/events/" + eventId);
@@ -23,16 +22,18 @@ public class HitsEventViewUtil {
 
         Object responseBody = response.getBody();
 
-        List<ViewStatsDto> output = null;
+        List<ViewStatsDto> output = new ArrayList<>();
+
+        ObjectMapper mapper = new ObjectMapper();
 
         if (responseBody != null) {
-            output = objectMapper.convertValue(responseBody, new TypeReference<List<ViewStatsDto>>() {});
+            output = mapper.convertValue(responseBody, new TypeReference<List<ViewStatsDto>>() {});
         }
 
         Long view = 0L;
 
         if (!output.isEmpty()) {
-            view = output.get(0).getHits();
+            view = output.getFirst().getHits();
         }
         return view;
 

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.category.mapper.CategoryMapper;
 import ru.practicum.category.model.Category;
+import ru.practicum.category.repository.CategoryRepository;
 import ru.practicum.event.dto.EventFullDto;
 import ru.practicum.event.dto.EventShortDto;
 import ru.practicum.event.dto.NewEventDto;
@@ -21,26 +22,46 @@ public class EventMapper {
 
     private final CategoryMapper categoryMapper;
     private final UserMapper userMapper;
+    private final CategoryRepository categoryRepository;
 
-    public Event toEvent(NewEventDto newEventDto, Category category, User user, LocalDateTime publishedOn) {
-        Event event = new Event();
-        event.setAnnotation(newEventDto.getAnnotation());
-        event.setCategory(category);
-        event.setConfirmedRequests(0L);
-        event.setCreatedOn(LocalDateTime.now());
-        event.setDescription(newEventDto.getDescription());
-        event.setEventDate(newEventDto.getEventDate());
-        event.setInitiator(user);
-        event.setLon(newEventDto.getLocation().getLon());
-        event.setLat(newEventDto.getLocation().getLat());
-        event.setPaid(newEventDto.isPaid());
-        event.setParticipantLimit(newEventDto.getParticipantLimit() == null ? 0 : newEventDto.getParticipantLimit());
-        event.setPublishedOn(publishedOn);
-        event.setRequestModeration(newEventDto.isRequestModeration());
-        event.setState(EventState.AWAITING_PUBLISHING);
-        event.setTitle(newEventDto.getTitle());
-        return event;
-    }
+//    public Event toEvent(NewEventDto newEventDto, Category category, User user, LocalDateTime publishedOn) {
+//        Event event = new Event();
+//        event.setAnnotation(newEventDto.getAnnotation());
+//        event.setCategory(category);
+//        event.setConfirmedRequests(0L);
+//        event.setCreatedOn(LocalDateTime.now());
+//        event.setDescription(newEventDto.getDescription());
+//        event.setEventDate(newEventDto.getEventDate());
+//        event.setInitiator(user);
+//        event.setLon(newEventDto.getLocation().getLon());
+//        event.setLat(newEventDto.getLocation().getLat());
+//        event.setPaid(newEventDto.isPaid());
+//        event.setParticipantLimit(newEventDto.getParticipantLimit() == null ? 0 : newEventDto.getParticipantLimit());
+//        event.setPublishedOn(publishedOn);
+//        event.setRequestModeration(newEventDto.isRequestModeration());
+//        event.setState(EventState.AWAITING_PUBLISHING);
+//        event.setTitle(newEventDto.getTitle());
+//        return event;
+//    }
+public Event toEvent(NewEventDto newEventDto, User user) {
+    Event event = new Event();
+    event.setAnnotation(newEventDto.getAnnotation());
+    event.setCategory(categoryRepository.findById(newEventDto.getCategoryId()).orElseThrow());
+    event.setConfirmedRequests(0L);
+    event.setCreatedOn(LocalDateTime.now());
+    event.setDescription(newEventDto.getDescription());
+    event.setEventDate(newEventDto.getEventDate());
+    event.setInitiator(user);
+    event.setLon(newEventDto.getLocation().getLon());
+    event.setLat(newEventDto.getLocation().getLat());
+    event.setPaid(newEventDto.isPaid());
+    event.setParticipantLimit(newEventDto.getParticipantLimit() == null ? 0 : newEventDto.getParticipantLimit());
+    event.setPublishedOn(LocalDateTime.now());
+    event.setRequestModeration(newEventDto.isRequestModeration());
+    event.setState(EventState.PENDING);
+    event.setTitle(newEventDto.getTitle());
+    return event;
+}
 
     public EventFullDto toFull(Event event, Long views) {
         EventFullDto eventFullDto = new EventFullDto();
