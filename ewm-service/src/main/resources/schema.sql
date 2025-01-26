@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS categories
 CREATE TABLE IF NOT EXISTS events
 (
     event_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    annotation VARCHAR(2000) NOT NULL,
+    annotation TEXT NOT NULL,
     category_id BIGINT NOT NULL,
     confirmed_requests Integer,
     created_on TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    description VARCHAR(7000) NOT NULL,
+    description TEXT NOT NULL,
     event_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     initiator_id BIGINT NOT NULL,
     --location BIGINT NOT NULL,

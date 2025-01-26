@@ -1,5 +1,6 @@
 package ru.practicum.event.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 import ru.practicum.category.model.Category;
@@ -20,6 +21,7 @@ public class Event {
     @Column(name = "title")
     private String title; // Заголовок
 
+    @Lob
     @Column(name = "annotation")
     private String annotation; // Краткое описание
 
@@ -37,6 +39,7 @@ public class Event {
     @JoinColumn(name = "initiator_id")
     private User initiator; // Пользователь
 
+    @Lob
     @Column(name = "description")
     private String description; // Полное описание события
 
@@ -47,6 +50,7 @@ public class Event {
     private EventState state; // Список состояний жизненного цикла события
 
     @Column(name = "created_on")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdOn; // Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
 
     @Column(name = "lat")

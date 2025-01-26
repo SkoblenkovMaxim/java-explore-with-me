@@ -1,9 +1,9 @@
 package ru.practicum.event.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.event.model.Location;
 
@@ -21,7 +21,7 @@ public class UpdateEventAdminRequest {
     @Size(min = 20, max = 7000)
     private String description; // Полное описание события
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
 
     private Location location; // Широта и долгота места проведения события

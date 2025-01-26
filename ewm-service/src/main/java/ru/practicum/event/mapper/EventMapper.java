@@ -43,10 +43,10 @@ public class EventMapper {
 //        event.setTitle(newEventDto.getTitle());
 //        return event;
 //    }
-public Event toEvent(NewEventDto newEventDto, User user) {
+public Event toEvent(NewEventDto newEventDto, Category category, User user) {
     Event event = new Event();
     event.setAnnotation(newEventDto.getAnnotation());
-    event.setCategory(categoryRepository.findById(newEventDto.getCategoryId()).orElseThrow());
+    event.setCategory(category);
     event.setConfirmedRequests(0L);
     event.setCreatedOn(LocalDateTime.now());
     event.setDescription(newEventDto.getDescription());
