@@ -26,11 +26,11 @@ public class UpdateEventAdminRequest {
 
     private Location location; // Широта и долгота места проведения события
 
-    private boolean paid; // Нужно ли оплачивать участие
+    private Boolean paid; // Нужно ли оплачивать участие
 
     private Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
-    private boolean requestModeration; // Нужна ли пре-модерация заявок на участие
+    private Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
 
     private String stateAction; // Новое состояние события - PUBLISH_EVENT, REJECT_EVENT
 
