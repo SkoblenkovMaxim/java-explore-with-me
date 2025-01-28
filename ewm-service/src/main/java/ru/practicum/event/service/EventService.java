@@ -3,8 +3,10 @@ package ru.practicum.event.service;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Pageable;
 import ru.practicum.event.dto.*;
-import ru.practicum.event.model.Event;
 import ru.practicum.event.model.EventState;
+import ru.practicum.request.dto.EventRequestStatusUpdateRequest;
+import ru.practicum.request.dto.EventRequestStatusUpdateResult;
+import ru.practicum.request.dto.ParticipationRequestDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,29 +21,19 @@ public interface EventService {
 
     EventFullDto updateEventPrivate(Long userId, Long eventId, UpdateEventUserRequest updateEventUserRequest);
 
-    List<EventFullDto> getEventsByIdsAdmin(
-            List<Long> users,
-            EventState states,
-            List<Long> categories,
-            LocalDateTime rangeStart,
-            LocalDateTime rangeEnd,
-            Pageable pageable
-    );
+    List<EventFullDto> getEventsAdmin(EventAdminParam eventAdminParam);
 
     EventFullDto updateEventAdmin(Long eventId, UpdateEventAdminRequest updateEventAdminRequest);
 
-    List<EventShortDto> getEventsPublic(
-            String text,
-            List<Long> categories,
-            Boolean paid,
-            LocalDateTime rangeStart,
-            LocalDateTime rangeEnd,
-            Boolean onlyAvailable,
-            String sort,
-            Pageable pageable,
-            HttpServletRequest request
-    );
+    List<EventShortDto> getEventsPublic(EventUserParam eventUserParam, HttpServletRequest request);
 
     EventFullDto getEventByIdPublic(Long eventId, HttpServletRequest request);
+
+    List<ParticipationRequestDto> getRequestsUserToEventPrivate(Long userId, Long eventId);
+
+    EventRequestStatusUpdateResult updateEventRequestStatusPrivate(
+            Long userId,
+            Long eventId,
+            EventRequestStatusUpdateRequest updateRequests);
 
 }

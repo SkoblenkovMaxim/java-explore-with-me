@@ -18,24 +18,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EventShortDto {
 
+    private Long id; // Идентификатор
+
+    @Size(min = 3, max = 120)
+    private String title; // Заголовок
+
     @Size(min = 20, max = 2000)
     private String annotation; // Краткое описание
 
     private CategoryDto category;
 
-    private Long confirmedRequests; // Количество одобренных заявок на участие в данном событии
+    private boolean paid; // Нужно ли оплачивать участие
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
 
-    private Long id; // Идентификатор
-
     private UserShortDto initiator; // Инициатор события
 
-    private boolean paid; // Нужно ли оплачивать участие
-
-    @Size(min = 3, max = 120)
-    private String title; // Заголовок
-
     private Long views; // Количество просмотрев события
+
+    private Long confirmedRequests; // Количество одобренных заявок на участие в данном событии
+
 }

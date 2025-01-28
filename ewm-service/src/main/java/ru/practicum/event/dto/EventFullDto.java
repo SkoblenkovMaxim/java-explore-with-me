@@ -36,6 +36,10 @@ public class EventFullDto {
 
     private UserShortDto initiator; // Инициатор события
 
+    private Long views; // Количество просмотрев события
+
+    private Long confirmedRequests; // Количество одобренных заявок на участие в данном событии
+
     @Size(min = 20, max = 7000)
     private String description; // Полное описание события
 
@@ -46,15 +50,11 @@ public class EventFullDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdOn; // Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
 
-    private Location location; // Широта и долгота места проведения события
-
-    private boolean requestModeration; // Нужна ли пре-модерация заявок на участие
-
-    private Long confirmedRequests; // Количество одобренных заявок на участие в данном событии
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime publishedOn; // Дата и время публикации события (в формате "yyyy-MM-dd HH:mm:ss")
 
-    private Long views; // Количество просмотрев события
+    private Location location; // Широта и долгота места проведения события
+
+    private boolean requestModeration; // Нужна ли пре-модерация заявок на участие
 
 }

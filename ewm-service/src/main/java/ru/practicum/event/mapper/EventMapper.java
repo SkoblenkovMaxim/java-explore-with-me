@@ -86,16 +86,6 @@ public Event toEvent(NewEventDto newEventDto, Category category, User user) {
     }
 
     public EventShortDto toShort(Event event, Long views) {
-//        EventShortDto eventShortDto = new EventShortDto();
-//        eventShortDto.setId(event.getId());
-//        eventShortDto.setAnnotation(event.getAnnotation());
-//        eventShortDto.setCategory(categoryMapper.toCategoryDto(event.getCategory()));
-//        eventShortDto.setConfirmedRequests(event.getConfirmedRequests());
-//        eventShortDto.setEventDate(event.getEventDate());
-//        eventShortDto.setInitiator(userMapper.toUserShortDto(event.getInitiator()));
-//        eventShortDto.setPaid(event.getPaid());
-//        eventShortDto.setTitle(event.getTitle());
-//        eventShortDto.setViews(views);
         EventShortDto eventShortDto = new EventShortDto();
         eventShortDto.setId(event.getId());
         eventShortDto.setAnnotation(event.getAnnotation());
