@@ -3,6 +3,7 @@ package ru.practicum.category.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.category.dto.CategoryDto;
+import ru.practicum.category.dto.NewCategoryDto;
 import ru.practicum.category.model.Category;
 
 @Component
@@ -13,6 +14,12 @@ public class CategoryMapper {
         Category category = new Category();
         category.setName(categoryDto.getName());
         return category;
+    }
+
+    public Category toCategory(NewCategoryDto categoryDto) {
+        return Category.builder()
+                .name(categoryDto.getName())
+                .build();
     }
 
     public CategoryDto toCategoryDto(Category category) {

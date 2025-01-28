@@ -1,12 +1,13 @@
 package ru.practicum.category.service;
 
 import ru.practicum.category.dto.CategoryDto;
+import ru.practicum.category.dto.NewCategoryDto;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    CategoryDto addCategory(CategoryDto request);
+    CategoryDto addCategory(NewCategoryDto newCategoryDto);
 
     List<CategoryDto> getCategories(Integer from, Integer size);
 

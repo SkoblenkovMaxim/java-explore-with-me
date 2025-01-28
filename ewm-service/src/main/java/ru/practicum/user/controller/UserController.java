@@ -1,8 +1,10 @@
 package ru.practicum.user.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.user.dto.NewUserRequest;
 import ru.practicum.user.dto.UserDto;
@@ -10,6 +12,7 @@ import ru.practicum.user.service.UserService;
 
 import java.util.List;
 
+@Validated
 @Slf4j
 @RestController
 @RequestMapping(path = "/admin/users")
@@ -21,7 +24,7 @@ public class UserController {
     @ResponseBody
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto addUserAdmin(@RequestBody NewUserRequest newUserRequest) {
+    public UserDto addUserAdmin(@Valid @RequestBody NewUserRequest newUserRequest) {
         log.info("Получен запрос на добавление нового пользователя");
         return userService.addUserAdmin(newUserRequest);
     }

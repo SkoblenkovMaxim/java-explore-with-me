@@ -24,7 +24,6 @@ import ru.practicum.user.repository.UserRepository;
 import ru.practicum.user.service.UserServiceImpl;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,6 +58,8 @@ public class EventServiceImpl implements EventService {
         Category category = categoryRepository.findById(newEventDto.getCategory()).orElseThrow();
 
         Event event = eventMapper.toEvent(newEventDto, category, user);
+
+        event.setRequestModeration(true);
 
         Event newEvent = eventRepository.save(event);
 
@@ -197,12 +198,13 @@ public class EventServiceImpl implements EventService {
         for (Event event : eventList) {
             Long view = getHitsEvent(
                     event.getId(),
-                    LocalDateTime.of(1975, 1, 1, 1, 0),
+                    LocalDateTime.now().minusDays(1000),
                     LocalDateTime.now(), false, statsClient
             );
             eventFullDtoList.add(eventMapper.toFull(event, view));
         }
 
+        log.info("Данные по критериям получены");
         return eventFullDtoList;
     }
 
@@ -296,6 +298,23 @@ public class EventServiceImpl implements EventService {
             HttpServletRequest request
     ) {
 
+//        EndpointHitDto endpointHitDto = new EndpointHitDto();
+//        endpointHitDto.setIp(request.getRemoteAddr());
+//        endpointHitDto.setUri(request.getRequestURI());
+//        endpointHitDto.setApp("ewm-main-service");
+//        endpointHitDto.setTimestamp(LocalDateTime.now());
+//        statsClient.hit(endpointHitDto);
+//
+        return null;
+
+    }
+
+    @Override
+    @Transactional
+    public EventFullDto getEventByIdPublic(Long eventId, HttpServletRequest request) {
+
+        log.info("Получен запрос на получение события по id");
+
         EndpointHitDto endpointHitDto = new EndpointHitDto();
         endpointHitDto.setIp(request.getRemoteAddr());
         endpointHitDto.setUri(request.getRequestURI());
@@ -303,8 +322,16 @@ public class EventServiceImpl implements EventService {
         endpointHitDto.setTimestamp(LocalDateTime.now());
         statsClient.hit(endpointHitDto);
 
-        return null;
+        Event event = eventRepository.findByIdAndState(eventId, EventState.PUBLISHED);
 
+        Long view = getHitsEvent(
+                event.getId(),
+                LocalDateTime.now().minusDays(1000),
+                LocalDateTime.now(), false, statsClient
+        );
+
+        log.info("Событие {} получено", event.getTitle());
+        return eventMapper.toFull(event, view);
     }
 
 }

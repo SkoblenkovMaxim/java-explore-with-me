@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.event.dto.EventShortDto;
 
 import java.util.List;
 
@@ -15,19 +14,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CompilationDto {
+public class NewCompilationDto {
 
     @NotNull
-    private Long id;
-
-    private List<EventShortDto> events;
-
-    @NotNull
-    private Boolean pinned;
-
     @NotBlank
-    @NotNull
     @Size(min = 1, max = 50)
     private String title;
+
+    private Boolean pinned;
+
+    private List<Long> events;
 
 }

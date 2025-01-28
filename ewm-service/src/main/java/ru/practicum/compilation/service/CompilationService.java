@@ -1,19 +1,20 @@
 package ru.practicum.compilation.service;
 
-import ru.practicum.compilation.dto.CompilationDto;
+import org.springframework.data.domain.Pageable;
+import ru.practicum.compilation.dto.*;
 
 import java.util.List;
 
 public interface CompilationService {
 
-    CompilationDto addCompilation(CompilationDto request);
+    CompilationDto addCompilationAdmin(NewCompilationDto newCompilationDto);
 
-    List<CompilationDto> getCompilations(Integer from, Integer size);
+    void deleteCompilationAdmin(Long compilationId);
 
-    CompilationDto getCompilation(Long catId);
+    CompilationDto updateCompilationAdmin(Long compilationId, UpdateCompilationRequest updateCompilationRequest);
 
-    void deleteCompilation(Long catId);
+    List<CompilationDto> getCompilationsPublic(Boolean pinned, Pageable pageable);
 
-    CompilationDto updateCompilation(Long catId, CompilationDto compilationDto);
+    CompilationDto getCompilationPublic(Long compilationId);
 
 }

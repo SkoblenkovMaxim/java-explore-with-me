@@ -1,6 +1,7 @@
 package ru.practicum.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class UpdateEventAdminRequest {
 
     private Boolean paid; // Нужно ли оплачивать участие
 
+    @PositiveOrZero
     private Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
     private Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
