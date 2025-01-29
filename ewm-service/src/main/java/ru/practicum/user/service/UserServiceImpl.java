@@ -2,6 +2,7 @@ package ru.practicum.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.exception.NotFoundException;
 import ru.practicum.user.dto.NewUserRequest;
@@ -37,17 +38,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getUsersByIdsAdmin(List<Long> ids, int from, int size) {
+    public List<UserDto> getUsersByIdsAdmin(List<Long> ids, Pageable pageable) {
         log.info("Получение списка пользователей по id {}", ids);
-
-        List<UserDto> users = userRepository.findAllById(ids).stream()
+        if (ids == null || ids.isEmpty()) {
+            return userRepository.findAll(pageable).stream()
+                    .map(userMapper::toUserDto)
+                    .collect(Collectors.toList());
+        }
+        return userRepository.findByIdIn(ids).stream()
                 .map(userMapper::toUserDto)
-                .skip(from)
-                .limit(size)
                 .collect(Collectors.toList());
-
-        log.info("Пользователи найдены {}", users);
-        return users;
+//        List<UserDto> users = userRepository.findAllById(ids).stream()
+//                .map(userMapper::toUserDto)
+//                .skip(from)
+//                .limit(size)
+//                .collect(Collectors.toList());
+//
+//        log.info("Пользователи найдены {}", users);
+//        return users;
     }
 
     @Override

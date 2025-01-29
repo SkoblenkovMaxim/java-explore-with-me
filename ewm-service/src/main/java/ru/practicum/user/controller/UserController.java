@@ -3,6 +3,7 @@ package ru.practicum.user.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "0") int from,
             @RequestParam(required = false, defaultValue = "10") int size) {
         log.info("Получен запрос на получение информации о пользователях");
-        return userService.getUsersByIdsAdmin(ids, from, size);
+        return userService.getUsersByIdsAdmin(ids, PageRequest.of(from, size));
     }
 
     @DeleteMapping("/{userId}")
