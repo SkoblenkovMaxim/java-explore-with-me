@@ -1,14 +1,10 @@
 package ru.practicum.event.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
-import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.event.model.Location;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder

@@ -15,7 +15,6 @@ import ru.practicum.event.repository.EventRepository;
 import ru.practicum.exception.NotFoundException;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
