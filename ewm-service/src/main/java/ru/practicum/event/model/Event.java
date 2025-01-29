@@ -44,7 +44,7 @@ public class Event {
     private String description; // Полное описание события
 
     @Column(name = "participant_limit")
-    private Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+    private Long participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
     @Enumerated(value = EnumType.STRING)
     private EventState state; // Список состояний жизненного цикла события

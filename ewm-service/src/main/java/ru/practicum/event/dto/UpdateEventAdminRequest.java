@@ -26,7 +26,7 @@ public class UpdateEventAdminRequest {
     private Boolean paid; // Нужно ли оплачивать участие
 
     @PositiveOrZero
-    private Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+    private Long participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
     private Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
 

@@ -43,7 +43,7 @@ public class EventFullDto {
     @Size(min = 20, max = 7000)
     private String description; // Полное описание события
 
-    private Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+    private Long participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
     private EventState state; // Список состояний жизненного цикла события
 

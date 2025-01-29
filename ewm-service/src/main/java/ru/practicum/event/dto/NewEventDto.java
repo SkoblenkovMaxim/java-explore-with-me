@@ -44,7 +44,7 @@ public class NewEventDto {
     private String description; // Полное описание события
 
     @PositiveOrZero
-    private Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+    private Long participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
 
     @NotNull
     private Location location; // Широта и долгота места проведения события
