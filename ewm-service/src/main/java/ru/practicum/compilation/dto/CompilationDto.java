@@ -20,8 +20,6 @@ public class CompilationDto {
     @NotNull
     private Long id;
 
-    private List<EventShortDto> events;
-
     @NotNull
     private Boolean pinned;
 
@@ -29,5 +27,7 @@ public class CompilationDto {
     @NotNull
     @Size(min = 1, max = 50)
     private String title;
+
+    private List<EventShortDto> events;
 
 }

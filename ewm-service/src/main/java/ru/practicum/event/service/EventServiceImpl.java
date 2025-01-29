@@ -15,6 +15,8 @@ import ru.practicum.StatsClient;
 import ru.practicum.category.mapper.CategoryMapper;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.repository.CategoryRepository;
+import ru.practicum.compilation.repository.CompilationRepository;
+import ru.practicum.compilation.service.CompilationService;
 import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.event.dto.*;
 import ru.practicum.event.mapper.EventMapper;
@@ -57,6 +59,8 @@ public class EventServiceImpl implements EventService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final RequestRepository requestRepository;
+    private final CompilationRepository compilationRepository;
+    private final CompilationService compilationService;
     private final UserServiceImpl userServiceImpl;
     private final StatsClient statsClient;
     private final CategoryMapper categoryMapper;
@@ -356,16 +360,6 @@ public class EventServiceImpl implements EventService {
 
         Specification<Event> specification = (((root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-//            if (eventUserParam.getText() != null) {
-//                predicates.add(
-//                        criteriaBuilder.or(
-//                                criteriaBuilder.like(
-//                                        criteriaBuilder.(root.get("annotation")), "%" + eventUserParam.getText().toLowerCase() + "%"),
-//                                criteriaBuilder.like(
-//                                        criteriaBuilder.lower(root.get("description")), "%" + eventUserParam.getText().toLowerCase() + "%")
-//                        )
-//                );
-//            }
             if (eventUserParam.getCategories() != null) {
                 CriteriaBuilder.In<Category> categoriesInClause = criteriaBuilder.in(root.get("category"));
                 for (Long categoryId : eventUserParam.getCategories()) {

@@ -24,12 +24,6 @@ public class Compilation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "compilation_event",
-            joinColumns = @JoinColumn(name = "compilation_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id"))
-    private List<Event> events;
-
     @Column(name = "title")
     @NotBlank
     @NotNull
@@ -38,5 +32,11 @@ public class Compilation {
 
     @Column(name = "pinned")
     private Boolean pinned;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "compilation_event",
+            joinColumns = @JoinColumn(name = "compilation_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<Event> events;
 
 }
