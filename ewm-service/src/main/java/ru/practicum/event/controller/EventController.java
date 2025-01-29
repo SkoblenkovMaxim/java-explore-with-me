@@ -72,8 +72,8 @@ public class EventController {
                                              @RequestParam(required = false) List<Long> categories,
                                              @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
                                              @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
-                                             @RequestParam(required = false, defaultValue = "0") @Min(0) Integer from,
-                                             @RequestParam(required = false, defaultValue = "10") @Min(1) Integer size) {
+                                             @RequestParam(required = false, defaultValue = "0") Integer from,
+                                             @RequestParam(required = false, defaultValue = "10") Integer size) {
         EventAdminParam eventAdminParam = new EventAdminParam();
         eventAdminParam.setUsers(users);
         eventAdminParam.setStates(states);
