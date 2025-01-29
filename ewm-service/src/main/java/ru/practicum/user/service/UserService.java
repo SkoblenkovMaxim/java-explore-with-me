@@ -9,7 +9,7 @@ public interface UserService {
 
     UserDto addUserAdmin(NewUserRequest newUserRequest);
 
-    List<UserDto> getAllUsersAdmin(int from, int size);
+    List<UserDto> getUsersByIdsAdmin(List<Long> ids, int from, int size);
 
     void deleteUserAdmin(Long id);
 

@@ -67,7 +67,7 @@ class EventServiceImplTest {
 
         newEventDto = NewEventDto.builder()
                 .annotation("annotation")
-                .categoryId(1L)
+                .category(1L)
                 .description("")
                 .eventDate(LocalDateTime.now().plusDays(1))
                 .location(Location.builder().lat(0.0F).lon(1.1F).build())

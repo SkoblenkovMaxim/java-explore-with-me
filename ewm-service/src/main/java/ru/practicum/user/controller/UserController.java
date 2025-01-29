@@ -31,11 +31,12 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAllUsersAdmin(
-            @RequestParam(defaultValue = "0") int from,
-            @RequestParam(defaultValue = "10") int size) {
+    public List<UserDto> getUsersByIdsAdmin(
+            @RequestParam(required = false) List<Long> ids,
+            @RequestParam(required = false, defaultValue = "0") int from,
+            @RequestParam(required = false, defaultValue = "10") int size) {
         log.info("Получен запрос на получение информации о пользователях");
-        return userService.getAllUsersAdmin(from, size);
+        return userService.getUsersByIdsAdmin(ids, from, size);
     }
 
     @DeleteMapping("/{userId}")

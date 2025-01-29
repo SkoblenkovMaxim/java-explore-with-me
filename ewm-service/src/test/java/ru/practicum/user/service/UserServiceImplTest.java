@@ -48,12 +48,12 @@ class UserServiceImplTest {
     }
 
     @Test
-    void getAllUsersAdmin() {
+    void getUsersByIdsAdmin() {
         userService.addUserAdmin(newUserRequest);
         List<Long> listUserDto = new ArrayList<>();
         listUserDto.add(userDto.getId());
 
-        userService.getAllUsersAdmin(0, 10);
+        userService.getUsersByIdsAdmin(List.of(0L),0, 10);
 
         assertEquals(1, userRepository.findAll().size());
     }

@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.event.dto.*;
-import ru.practicum.event.model.EventState;
 import ru.practicum.event.service.EventService;
 import ru.practicum.request.dto.EventRequestStatusUpdateRequest;
 import ru.practicum.request.dto.EventRequestStatusUpdateResult;
@@ -92,7 +91,7 @@ public class EventController {
     @ResponseStatus(HttpStatus.OK)
     public EventFullDto updateEventAdmin(
             @PathVariable Long eventId,
-            @RequestBody UpdateEventAdminRequest updateEventAdminRequest) {
+            @Valid @RequestBody UpdateEventAdminRequest updateEventAdminRequest) {
         log.info("Запрос на изменение события админом");
         return eventService.updateEventAdmin(eventId, updateEventAdminRequest);
     }

@@ -17,13 +17,13 @@ public class UpdateEventAdminRequest {
     @Size(min = 20, max = 2000)
     private String annotation; // Краткое описание
 
-    private CategoryDto category;
+    private Long category;
 
     @Size(min = 20, max = 7000)
     private String description; // Полное описание события
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
 
     private Location location; // Широта и долгота места проведения события
 

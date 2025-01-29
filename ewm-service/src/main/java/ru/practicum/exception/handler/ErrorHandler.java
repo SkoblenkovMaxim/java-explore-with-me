@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.exception.IncorrectDataException;
 import ru.practicum.exception.NotFoundException;
+import ru.practicum.exception.UpdateEventIncorrectDataException;
 import ru.practicum.exception.ValidationException;
 
 @Slf4j
@@ -40,4 +41,12 @@ public class ErrorHandler {
         log.warn(e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleUpdateEventIncorrectDataException(final UpdateEventIncorrectDataException e) {
+        log.warn(e.getMessage(), e);
+        return new ErrorResponse(e.getMessage());
+    }
+
 }

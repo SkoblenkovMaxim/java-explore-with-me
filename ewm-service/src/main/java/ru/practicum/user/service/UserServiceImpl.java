@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -27,7 +27,9 @@ public class UserServiceImpl implements UserService{
 
         if (isUserExistByEmail(newUserRequest.getEmail())) {
             log.info("Нарушение целостности данных");
-            throw new IllegalArgumentException("Пользователь с email: " + newUserRequest.getEmail() + " уже зарегистрирован");
+            throw new IllegalArgumentException(
+                    "Пользователь с email: " + newUserRequest.getEmail() + " уже зарегистрирован"
+            );
         }
 
         log.info("Пользователь зарегистрирован");
@@ -35,19 +37,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<UserDto> getAllUsersAdmin(int from, int size) {
-        log.info("Получение списка пользователей");
+    public List<UserDto> getUsersByIdsAdmin(List<Long> ids, int from, int size) {
+        log.info("Получение списка пользователей по id {}", ids);
 
-        List<UserDto> users = userRepository.findAll().stream()
-                .map(userMapper::toUserDto)
-                .toList();
-
-        log.info("Пользователи найдены");
-        return userRepository.findAll().stream()
+        List<UserDto> users = userRepository.findAllById(ids).stream()
                 .map(userMapper::toUserDto)
                 .skip(from)
                 .limit(size)
                 .collect(Collectors.toList());
+
+        log.info("Пользователи найдены {}", users);
+        return users;
     }
 
     @Override

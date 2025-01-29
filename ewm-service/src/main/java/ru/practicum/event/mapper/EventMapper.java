@@ -8,7 +8,6 @@ import ru.practicum.category.repository.CategoryRepository;
 import ru.practicum.event.dto.EventFullDto;
 import ru.practicum.event.dto.EventShortDto;
 import ru.practicum.event.dto.NewEventDto;
-import ru.practicum.event.dto.UpdateEventUserRequest;
 import ru.practicum.event.model.Event;
 import ru.practicum.event.model.EventState;
 import ru.practicum.event.model.Location;
@@ -44,25 +43,26 @@ public class EventMapper {
 //        event.setTitle(newEventDto.getTitle());
 //        return event;
 //    }
-public Event toEvent(NewEventDto newEventDto, Category category, User user) {
-    Event event = new Event();
-    event.setAnnotation(newEventDto.getAnnotation());
-    event.setCategory(category);
-    event.setConfirmedRequests(0L);
-    event.setCreatedOn(LocalDateTime.now());
-    event.setDescription(newEventDto.getDescription());
-    event.setEventDate(newEventDto.getEventDate());
-    event.setInitiator(user);
-    event.setLon(newEventDto.getLocation().getLon());
-    event.setLat(newEventDto.getLocation().getLat());
-    event.setPaid(newEventDto.isPaid());
-    event.setParticipantLimit(newEventDto.getParticipantLimit() == null ? 0 : newEventDto.getParticipantLimit());
-    event.setPublishedOn(LocalDateTime.now());
-    event.setRequestModeration(newEventDto.isRequestModeration());
-    event.setState(EventState.PENDING);
-    event.setTitle(newEventDto.getTitle());
-    return event;
-}
+
+    public Event toEvent(NewEventDto newEventDto, Category category, User user) {
+        Event event = new Event();
+        event.setAnnotation(newEventDto.getAnnotation());
+        event.setCategory(category);
+        event.setConfirmedRequests(0L);
+        event.setCreatedOn(LocalDateTime.now());
+        event.setDescription(newEventDto.getDescription());
+        event.setEventDate(newEventDto.getEventDate());
+        event.setInitiator(user);
+        event.setLon(newEventDto.getLocation().getLon());
+        event.setLat(newEventDto.getLocation().getLat());
+        event.setPaid(newEventDto.isPaid());
+        event.setParticipantLimit(newEventDto.getParticipantLimit() == null ? 0 : newEventDto.getParticipantLimit());
+        event.setPublishedOn(LocalDateTime.now());
+        event.setRequestModeration(newEventDto.isRequestModeration());
+        event.setState(EventState.PENDING);
+        event.setTitle(newEventDto.getTitle());
+        return event;
+    }
 
     public EventFullDto toFull(Event event, Long views) {
         EventFullDto eventFullDto = new EventFullDto();
