@@ -61,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(catId).orElseThrow(
                 () -> new NotFoundException("Category not found"));
         if (eventRepository.findByCategoryId(catId) != null) {
-            throw new IllegalArgumentException("Категория с таким именем уже существует");
+            throw new IllegalArgumentException("Нельзя удалить категорию, которая уже используется в событиях");
         }
         categoryRepository.deleteById(catId);
         log.info("Category was deleted");

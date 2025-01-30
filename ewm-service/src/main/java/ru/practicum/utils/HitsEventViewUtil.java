@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import ru.practicum.StatsClient;
+import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.dto.ViewStatsDto;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,11 @@ public class HitsEventViewUtil {
 
         List<String> uris = new ArrayList<>();
         uris.add("/events/" + eventId);
+
+//        EndpointHitDto endpointHitDto = EndpointHitDto.builder()
+//                .uri("/events/" + eventId)
+//                .app("${ru.practicum.ewm.server.name}").build();
+//        statsClient.hit(endpointHitDto);
 
         ResponseEntity<Object> response = statsClient.getStats(start, end, uris, unique);
 

@@ -39,8 +39,8 @@ public class EventController {
     @ResponseStatus(HttpStatus.OK)
     public List<EventShortDto> getEventsByUserIdPrivate(
             @PathVariable Long userId,
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size) {
+            @RequestParam(required = false, defaultValue = "0") Integer from,
+            @RequestParam(required = false, defaultValue = "10") Integer size) {
         log.info("Получен запрос на получение событий пользователя");
         return eventService.getEventsByUserIdPrivate(userId, PageRequest.of(from, size));
     }

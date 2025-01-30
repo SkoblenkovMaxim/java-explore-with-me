@@ -32,7 +32,7 @@ public class NewEventDto {
     @NotNull
     private Long category;
 
-    private boolean paid; // Нужно ли оплачивать участие
+    private Boolean paid; // Нужно ли оплачивать участие
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -50,6 +50,6 @@ public class NewEventDto {
     private Location location; // Широта и долгота места проведения события
 
 
-    private boolean requestModeration; // Нужна ли пре-модерация заявок на участие
+    private Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
 
 }

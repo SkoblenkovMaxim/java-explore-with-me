@@ -82,8 +82,6 @@ public class EventServiceImpl implements EventService {
 
         Event event = eventMapper.toEvent(newEventDto, category, user);
 
-        event.setRequestModeration(true);
-
         Event newEvent = eventRepository.save(event);
 
         log.info("Событие добавлено");

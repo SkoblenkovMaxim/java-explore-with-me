@@ -29,7 +29,7 @@ public class EventFullDto {
 
     private CategoryDto category;
 
-    private boolean paid; // Нужно ли оплачивать участие
+    private Boolean paid; // Нужно ли оплачивать участие
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
@@ -55,6 +55,6 @@ public class EventFullDto {
 
     private Location location; // Широта и долгота места проведения события
 
-    private boolean requestModeration; // Нужна ли пре-модерация заявок на участие
+    private Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
 
 }

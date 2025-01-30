@@ -24,26 +24,6 @@ public class EventMapper {
     private final UserMapper userMapper;
     private final CategoryRepository categoryRepository;
 
-//    public Event toEvent(NewEventDto newEventDto, Category category, User user, LocalDateTime publishedOn) {
-//        Event event = new Event();
-//        event.setAnnotation(newEventDto.getAnnotation());
-//        event.setCategory(category);
-//        event.setConfirmedRequests(0L);
-//        event.setCreatedOn(LocalDateTime.now());
-//        event.setDescription(newEventDto.getDescription());
-//        event.setEventDate(newEventDto.getEventDate());
-//        event.setInitiator(user);
-//        event.setLon(newEventDto.getLocation().getLon());
-//        event.setLat(newEventDto.getLocation().getLat());
-//        event.setPaid(newEventDto.isPaid());
-//        event.setParticipantLimit(newEventDto.getParticipantLimit() == null ? 0 : newEventDto.getParticipantLimit());
-//        event.setPublishedOn(publishedOn);
-//        event.setRequestModeration(newEventDto.isRequestModeration());
-//        event.setState(EventState.AWAITING_PUBLISHING);
-//        event.setTitle(newEventDto.getTitle());
-//        return event;
-//    }
-
     public Event toEvent(NewEventDto newEventDto, Category category, User user) {
         Event event = new Event();
         event.setAnnotation(newEventDto.getAnnotation());
@@ -55,10 +35,10 @@ public class EventMapper {
         event.setInitiator(user);
         event.setLon(newEventDto.getLocation().getLon());
         event.setLat(newEventDto.getLocation().getLat());
-        event.setPaid(newEventDto.isPaid());
+        event.setPaid(newEventDto.getPaid() == null ? false : newEventDto.getPaid());
         event.setParticipantLimit(newEventDto.getParticipantLimit() == null ? 0 : newEventDto.getParticipantLimit());
         event.setPublishedOn(LocalDateTime.now());
-        event.setRequestModeration(newEventDto.isRequestModeration());
+        event.setRequestModeration(newEventDto.getRequestModeration() == null ? true : newEventDto.getRequestModeration());
         event.setState(EventState.PENDING);
         event.setTitle(newEventDto.getTitle());
         return event;

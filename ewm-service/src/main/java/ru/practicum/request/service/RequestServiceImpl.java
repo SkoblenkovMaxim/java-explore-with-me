@@ -41,9 +41,9 @@ public class RequestServiceImpl implements RequestService {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new NotFoundException("Пользователь не найден"));;
         List<Request> requests = requestRepository.findAllByRequesterIdAndEventId(userId, eventId);
-//        if (!requests.isEmpty()) {
-//            throw new IllegalArgumentException("Запрос не может быть пустым");
-//        }
+        if (!requests.isEmpty()) {
+            throw new IllegalArgumentException("Запрос c такими данными уже существует");
+        }
         if (userId.equals(event.getInitiator().getId())) {
             throw new IllegalArgumentException("Инициатор запроса не найден");
         }
