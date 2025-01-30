@@ -35,11 +35,12 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional
     public ParticipationRequestDto addRequestPrivate(Long userId, Long eventId) {
+        log.info("Добавление запроса");
         Request request = new Request();
         Event event = eventRepository.findById(eventId).orElseThrow(
                 () -> new NotFoundException("Событие не найдено"));
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new NotFoundException("Пользователь не найден"));;
+                () -> new NotFoundException("Пользователь не найден"));
         List<Request> requests = requestRepository.findAllByRequesterIdAndEventId(userId, eventId);
         if (!requests.isEmpty()) {
             throw new IllegalArgumentException("Запрос c такими данными уже существует");
@@ -61,8 +62,8 @@ public class RequestServiceImpl implements RequestService {
 
         if (event.getParticipantLimit() == 0 || !event.getRequestModeration()) {
             request.setStatus(RequestStatus.CONFIRMED);
-//            event.setConfirmedRequests(event.getConfirmedRequests() + 1);
-//            eventRepository.save(event);
+            event.setConfirmedRequests(event.getConfirmedRequests() + 1);
+            eventRepository.save(event);
         }
         log.info("Добавлен запрос пользователя");
         return requestMapper.toDto(requestRepository.save(request));
