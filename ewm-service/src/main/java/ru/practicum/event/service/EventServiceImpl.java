@@ -122,10 +122,12 @@ public class EventServiceImpl implements EventService {
                                            Long eventId,
                                            UpdateEventUserRequest updateEventUserRequest
     ) {
+        log.info("Изменение события пользователем");
+        Event event = eventRepository.findByInitiatorIdAndId(userId, eventId);
 
-        Event event = eventRepository.findById(eventId).orElseThrow(
-                () -> new NotFoundException("Событие не найдено или недоступно")
-        );
+        if (event.getState() == EventState.PUBLISHED) {
+            throw new IllegalArgumentException("Пользователь не может изменять опубликованное событие");
+        }
 
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new NotFoundException("Пользователь не найден")
@@ -147,6 +149,11 @@ public class EventServiceImpl implements EventService {
         if (updateEventUserRequest.getDescription() != null) {
             event.setDescription(updateEventUserRequest.getDescription());
         }
+
+//        LocalDateTime eventDate = LocalDateTime.parse(
+//                updateEventUserRequest.getEventDate(),
+//                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+//        );
 
         if (updateEventUserRequest.getEventDate() != null) {
             if (updateEventUserRequest.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
