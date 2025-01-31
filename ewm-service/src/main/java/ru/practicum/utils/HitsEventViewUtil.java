@@ -18,11 +18,6 @@ public class HitsEventViewUtil {
         List<String> uris = new ArrayList<>();
         uris.add("/events/" + eventId);
 
-//        EndpointHitDto endpointHitDto = EndpointHitDto.builder()
-//                .uri("/events/" + eventId)
-//                .app("${ru.practicum.ewm.server.name}").build();
-//        statsClient.hit(endpointHitDto);
-
         ResponseEntity<Object> response = statsClient.getStats(start, end, uris, unique);
 
         Object responseBody = response.getBody();
@@ -38,7 +33,7 @@ public class HitsEventViewUtil {
         Long view = 0L;
 
         if (!output.isEmpty()) {
-            view = output.getFirst().getHits();
+            view = output.get(0).getHits();
         }
         return view;
 

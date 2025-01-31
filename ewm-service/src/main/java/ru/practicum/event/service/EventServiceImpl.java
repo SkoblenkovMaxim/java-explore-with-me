@@ -195,7 +195,11 @@ public class EventServiceImpl implements EventService {
         }
 
         log.info("Событие изменено");
-        return eventMapper.toFull(eventRepository.save(event), 0L);
+        return eventMapper.toFull(eventRepository.save(event), getHitsEvent(eventId,
+                LocalDateTime.now().minusDays(100),
+                LocalDateTime.now(),
+                false,
+                statsClient));
 
     }
 
@@ -444,7 +448,7 @@ public class EventServiceImpl implements EventService {
         Long view = getHitsEvent(
                 event.getId(),
                 LocalDateTime.now().minusDays(1000),
-                LocalDateTime.now(), false, statsClient
+                LocalDateTime.now(), true, statsClient
         );
 
         log.info("Событие {} получено", event.getTitle());
