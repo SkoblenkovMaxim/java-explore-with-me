@@ -25,7 +25,6 @@ import ru.practicum.event.model.EventSort;
 import ru.practicum.event.model.EventState;
 import ru.practicum.event.repository.EventRepository;
 import ru.practicum.exception.IllegalArgumentException;
-import ru.practicum.exception.IncorrectDataException;
 import ru.practicum.exception.NotFoundException;
 import ru.practicum.exception.UpdateEventIncorrectDataException;
 import ru.practicum.exception.ValidationException;
@@ -150,14 +149,9 @@ public class EventServiceImpl implements EventService {
             event.setDescription(updateEventUserRequest.getDescription());
         }
 
-//        LocalDateTime eventDate = LocalDateTime.parse(
-//                updateEventUserRequest.getEventDate(),
-//                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-//        );
-
         if (updateEventUserRequest.getEventDate() != null) {
             if (updateEventUserRequest.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
-                throw new IncorrectDataException("Начало события должно быть не менее 2 часов от его создания");
+                throw new ValidationException("Начало события должно быть не менее 2 часов от его создания");
             } else {
                 event.setEventDate(updateEventUserRequest.getEventDate());
             }
@@ -346,6 +340,7 @@ public class EventServiceImpl implements EventService {
 
         event.setId(eventId);
         eventRepository.save(event);
+
         return eventMapper.toFull(event, getHitsEvent(eventId,
                 LocalDateTime.now().minusDays(100),
                 LocalDateTime.now(),

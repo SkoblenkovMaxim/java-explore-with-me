@@ -90,7 +90,8 @@ public class EventController {
     @ResponseStatus(HttpStatus.OK)
     public EventFullDto updateEventAdmin(
             @PathVariable Long eventId,
-            @Valid @RequestBody UpdateEventAdminRequest updateEventAdminRequest) {
+            @Valid @RequestBody UpdateEventAdminRequest updateEventAdminRequest
+    ) {
         log.info("Запрос на изменение события админом");
         return eventService.updateEventAdmin(eventId, updateEventAdminRequest);
     }
