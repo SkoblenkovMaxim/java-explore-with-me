@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.dto.ViewStatsDto;
-import ru.practicum.exception.ValidationException;
+import ru.practicum.exception.NotFoundException;
 import ru.practicum.mapper.EndpointHitMapper;
 import ru.practicum.model.EndpointHit;
 import ru.practicum.repository.EndpointHitRepository;
@@ -53,7 +53,7 @@ public class StatsServiceImpl implements StatsService {
         List<ViewStatsDto> listViewStatsDto;
 
         if (startTime.isAfter(endTime)) {
-            throw new ValidationException("Время начала не может быть позже времени окончания");
+            throw new NotFoundException("Время начала не может быть позже времени окончания");
         }
 
         if (!CollectionUtils.isEmpty(uriList)) {

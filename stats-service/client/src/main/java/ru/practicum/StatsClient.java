@@ -37,10 +37,6 @@ public class StatsClient extends BaseClient {
                                            Boolean unique
     ) {
 
-        if (start.isAfter(end)) {
-            return ResponseEntity.badRequest().build();
-        }
-
         String urisStr = uris.stream().map(uri -> "&uris=" + uri).collect(Collectors.joining());
         Map<String, Object> params = new HashMap<>();
         params.put("start", start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
