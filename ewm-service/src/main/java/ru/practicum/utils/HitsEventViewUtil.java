@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import ru.practicum.StatsClient;
 import ru.practicum.dto.ViewStatsDto;
+import ru.practicum.exception.ValidationException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ import java.util.List;
 public class HitsEventViewUtil {
 
     public static Long getHitsEvent(Long eventId, LocalDateTime start, LocalDateTime end, Boolean unique, StatsClient statsClient) {
+
+        if (start.isAfter(end)) {
+            throw new ValidationException("Start date cannot be after end date");
+        }
 
         List<String> uris = new ArrayList<>();
         uris.add("/events/" + eventId);

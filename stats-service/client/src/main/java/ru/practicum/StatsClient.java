@@ -8,7 +8,6 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import ru.practicum.dto.EndpointHitDto;
-import ru.practicum.exception.DateBadRequestException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,9 +36,6 @@ public class StatsClient extends BaseClient {
                                            List<String> uris,
                                            Boolean unique
     ) {
-        if (start.isAfter(end)) {
-            throw new DateBadRequestException("Start date cannot be after end date");
-        }
 
         String urisStr = uris.stream().map(uri -> "&uris=" + uri).collect(Collectors.joining());
         Map<String, Object> params = new HashMap<>();
