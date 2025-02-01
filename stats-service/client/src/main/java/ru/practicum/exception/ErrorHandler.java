@@ -12,15 +12,9 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleNotFoundException(final NotFoundException e) {
+    public ErrorResponse handleDateBadRequestException(final DateBadRequestException e) {
         log.warn(e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleInternalServerError(final ValidationException e) {
-        log.warn(e.getMessage(), e);
-        return new ErrorResponse(e.getMessage());
-    }
 }
