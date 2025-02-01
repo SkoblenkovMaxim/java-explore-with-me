@@ -40,7 +40,6 @@ import ru.practicum.user.repository.UserRepository;
 import ru.practicum.user.service.UserServiceImpl;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -309,16 +308,12 @@ public class EventServiceImpl implements EventService {
         }
 
         if (updateEventAdminRequest.getEventDate() != null) {
-            LocalDateTime eventDate = LocalDateTime.parse(
-                    updateEventAdminRequest.getEventDate(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            );
-            if (eventDate.isBefore(LocalDateTime.now().minusHours(1))) {
+            if (updateEventAdminRequest.getEventDate().isBefore(LocalDateTime.now().minusHours(1))) {
                 throw new UpdateEventIncorrectDataException(
                         "Дата начала изменяемого события должна быть не ранее чем за час от даты публикации"
                 );
             }
-            event.setEventDate(eventDate);
+            event.setEventDate(updateEventAdminRequest.getEventDate());
         }
 
         if (updateEventAdminRequest.getLocation() != null) {

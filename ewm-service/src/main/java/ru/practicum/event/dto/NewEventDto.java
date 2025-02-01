@@ -49,7 +49,6 @@ public class NewEventDto {
     @NotNull
     private Location location; // Широта и долгота места проведения события
 
-
     private Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
 
 }
