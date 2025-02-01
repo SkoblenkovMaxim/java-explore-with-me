@@ -23,4 +23,11 @@ public class ErrorHandler {
         log.warn(e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleDateBadRequestException(final DateBadRequestException e) {
+        log.warn(e.getMessage(), e);
+        return new ErrorResponse(e.getMessage());
+    }
 }
