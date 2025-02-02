@@ -56,7 +56,7 @@ public class CommentMapper {
 
         return Comment.builder()
                 .text(updateCommentDto.getText())
-                .updated(updateCommentDto.getUpdated())
+                .updated(LocalDateTime.now())
                 .build();
     }
 

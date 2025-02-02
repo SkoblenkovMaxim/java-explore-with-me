@@ -18,7 +18,9 @@ import ru.practicum.exception.NotFoundException;
 import ru.practicum.exception.ValidationException;
 import ru.practicum.user.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -94,7 +96,7 @@ public class CommentServiceImpl implements CommentService {
                 () -> new ValidationException("Нельзя обновить несуществующий комментарий")
         );
 
-        if (!comment.getAuthor().getId().equals(authorId)) {
+        if (!Objects.equals(comment.getAuthor().getId(), authorId)) {
             throw new IllegalArgumentException("Только автор может изменять комментарий");
         }
 
@@ -104,8 +106,10 @@ public class CommentServiceImpl implements CommentService {
         }
 
         comment.setText(updateCommentDto.getText());
+        comment.setUpdated(LocalDateTime.now());
+        Comment updateComment = commentRepository.save(comment);
 
-        return commentMapper.toCommentDto(commentRepository.save(commentMapper.toUpdateComment(updateCommentDto)));
+        return commentMapper.toCommentDto(updateComment);
 
     }
 
@@ -148,7 +152,7 @@ public class CommentServiceImpl implements CommentService {
 
         Comment comment = commentRepository.findById(commentId).orElseThrow();
 
-        if (!comment.getAuthor().getId().equals(authorId)) {
+        if (!Objects.equals(comment.getAuthor().getId(), authorId)) {
             throw new ValidationException("Только автор может удалить комментарий");
         }
 

@@ -21,7 +21,7 @@ public class CommentDto {
     private Long id;
     private EventShortDto event;
     @NotBlank
-    @Size(min = 1, max = 1000)
+    @Size(min = 1, max = 2000)
     private String text;
     private UserShortDto author;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
