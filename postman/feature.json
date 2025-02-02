@@ -844,105 +844,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/comments/users/{{uid}}/events/{{eid}}",
+							"raw": "{{baseUrl}}/comments/users/4/events/4",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"comments",
 								"users",
-								"{{uid}}",
+								"4",
 								"events",
-								"{{eid}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Добавление комментария к неопубликованному событию",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"const main = async () => {\r",
-									"    const api = new API(pm);\r",
-									"    const rnd = new RandomUtils();\r",
-									"\r",
-									"    try {\r",
-									"        const user = await api.addUser(rnd.getUser());\r",
-									"        const category = await api.addCategory(rnd.getCategory());\r",
-									"        let event = await api.addEvent(user.id, rnd.getEvent(category.id));\r",
-									"        pm.request.removeQueryParams(['users', 'categories']);\r",
-									"        pm.collectionVariables.set(\"eid\", event.id);\r",
-									"        pm.collectionVariables.set(\"uid\", user.id);\r",
-									"        pm.request.url.query.add({key: \"from\",value: \"0\"});\r",
-									"        pm.request.url.query.add({key: \"size\",value: \"10\"});\r",
-									"    } catch(err) {\r",
-									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-									"    }\r",
-									"};\r",
-									"\r",
-									"const interval = setInterval(() => {}, 1000);\r",
-									"\r",
-									"setTimeout(async () => \r",
-									"    {\r",
-									"        try {\r",
-									"            // выполняем наш скрипт\r",
-									"            await main();\r",
-									"        } catch (e) {\r",
-									"            console.error(e);\r",
-									"        } finally {\r",
-									"            clearInterval(interval);\r",
-									"        }\r",
-									"    },  \r",
-									"    100 \r",
-									");"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
-									"    pm.response.to.have.status(400);   \r",
-									"    pm.response.to.be.withBody;\r",
-									"    pm.response.to.be.json;\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"Comment for event  from user \"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/comments/users/{{uid}}/events/{{eid}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"comments",
-								"users",
-								"{{uid}}",
-								"events",
-								"{{eid}}"
+								"4"
 							]
 						}
 					},
@@ -1023,16 +934,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/comments/users/{{uid}}/events/{{eid}}",
+							"raw": "{{baseUrl}}/comments/users/3/events/3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"comments",
 								"users",
-								"{{uid}}",
+								"3",
 								"events",
-								"{{eid}}"
+								"3"
 							]
 						}
 					},
@@ -1125,16 +1036,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/comments/users/{{uid}}/events/{{eid}}",
+							"raw": "{{baseUrl}}/comments/users/3/events/3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"comments",
 								"users",
-								"{{uid}}",
+								"3",
 								"events",
-								"{{eid}}"
+								"3"
 							]
 						}
 					},
@@ -1248,11 +1159,11 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "{{uid}}"
+									"value": "1"
 								},
 								{
 									"key": "commentId",
-									"value": "{{commentId}}"
+									"value": "3"
 								}
 							]
 						}
