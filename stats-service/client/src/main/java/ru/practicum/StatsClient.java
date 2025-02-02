@@ -10,7 +10,11 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 import ru.practicum.dto.EndpointHitDto;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class StatsClient extends BaseClient {
@@ -29,17 +33,16 @@ public class StatsClient extends BaseClient {
 
     public ResponseEntity<Object> getStats(LocalDateTime start,
                                            LocalDateTime end,
-                                           String uris,
+                                           List<String> uris,
                                            Boolean unique
     ) {
+
+        String urisStr = uris.stream().map(uri -> "&uris=" + uri).collect(Collectors.joining());
         Map<String, Object> params = new HashMap<>();
-
-        params.put("start", start);
-        params.put("end", end);
-        params.put("uris", uris);
+        params.put("start", start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        params.put("end", end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         params.put("unique", unique);
-
-        return get("/stats?start={start}&end={end}&uris={uris}&unique={unique}", params);
+        return get("/stats?start={start}&end={end}" + urisStr + "&unique={unique}", params);
     }
 
     public ResponseEntity<Object> hit(EndpointHitDto endpointHitDto) {
