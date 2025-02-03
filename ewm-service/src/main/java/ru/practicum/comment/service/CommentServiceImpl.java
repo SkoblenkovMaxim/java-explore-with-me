@@ -54,7 +54,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public List<CommentDto> getComments(Long eventId) {
+    public List<CommentDto> findAllByEventId(Long eventId) {
         log.info("Получение комментариев по событию с id {}", eventId);
         return commentRepository.findById(eventId).stream()
                 .map(comment -> {
@@ -122,11 +122,16 @@ public class CommentServiceImpl implements CommentService {
             throw new NotFoundException("Комментарий не найден");
         }
 
-        Comment comment = new Comment();
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new ValidationException("Нельзя обновить несуществующий комментарий")
+        );
+
         comment.setId(commentId);
 
         if (commentDto.getEvent() != null) {
-            comment.setEvent(eventRepository.findById(commentId).orElseThrow());
+            comment.setEvent(eventRepository.findById(commentId).orElseThrow(
+                    () -> new ValidationException("Нельзя обновить комментарий к отсутствущему событию")
+            ));
         }
         if (commentDto.getText() != null) {
             comment.setText(commentDto.getText());
@@ -137,9 +142,7 @@ public class CommentServiceImpl implements CommentService {
         if (commentDto.getCreated() != null) {
             comment.setCreated(commentDto.getCreated());
         }
-        if (commentDto.getUpdated() != null) {
-            comment.setUpdated(commentDto.getUpdated());
-        }
+        comment.setUpdated(commentDto.getUpdated());
 
         log.info("Updating comment {}", comment);
         return commentMapper.toCommentDto(commentRepository.save(comment));

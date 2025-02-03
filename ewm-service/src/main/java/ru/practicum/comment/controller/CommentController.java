@@ -33,9 +33,9 @@ public class CommentController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/comments/{eventId}")
-    public List<CommentDto> getComments(@PathVariable Long eventId) {
+    public List<CommentDto> findAllByEventId(@PathVariable Long eventId) {
         log.info("Retrieving comments for event {}", eventId);
-        return commentService.getComments(eventId);
+        return commentService.findAllByEventId(eventId);
     }
 
     @ResponseStatus(HttpStatus.OK)

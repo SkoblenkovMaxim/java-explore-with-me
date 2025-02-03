@@ -10,7 +10,7 @@ public interface CommentService {
 
     CommentDto createCommentPrivate(Long eventId, Long userId, NewCommentDto newCommentDto);
 
-    List<CommentDto> getComments(Long eventId);
+    List<CommentDto> findAllByEventId(Long eventId);
 
     List<CommentDto> getCommentsByAuthorId(Long authorId);
 
