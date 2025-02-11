@@ -19,7 +19,8 @@
 - Spring Data JPA;
 - Spring Web;
 - Spring Validation;
-- Docker.
+- Docker;
+- многомодульное построение ПО (микросервисы).
 
 
 Схема БД для сервиса "Афиша" (основной модуль):
