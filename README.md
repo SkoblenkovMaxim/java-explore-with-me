@@ -18,7 +18,8 @@
 - Hibernate;
 - Spring Data JPA;
 - Spring Web;
-- Spring Validation
+- Spring Validation;
+- Docker.
 
 
 Схема БД для сервиса "Афиша" (основной модуль):
